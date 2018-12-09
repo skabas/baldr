@@ -19,11 +19,6 @@ class Image
         $this->resource = $resource;
     }
 
-    public function getResource()
-    {
-        return $this->resource;
-    }
-
     public function output(OutputInterface $output)
     {
         $output->handle($this->resource);

@@ -6,11 +6,12 @@
  * @license https://github.com/skabas/baldr/blob/master/LICENSE
  */
 
-// imagesavealpha($new, TRUE);
-
 namespace Skabas\Baldr\Image\Output;
+
+use Skabas\Baldr\Image\Output\Type\OutputTypeInterface;
 
 interface OutputInterface
 {
+    public function __construct(OutputTypeInterface $outputType);
     public function handle($resource);
 }

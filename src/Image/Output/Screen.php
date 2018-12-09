@@ -8,11 +8,19 @@
 
 namespace Skabas\Baldr\Image\Output;
 
+use Skabas\Baldr\Image\Output\Type\OutputTypeInterface;
+
 class Screen implements OutputInterface
 {
+    private $outputType;
+
+    public function __construct(OutputTypeInterface $outputType)
+    {
+        $this->outputType = $outputType;
+    }
+
     public function handle($resource)
     {
-        imagepng($resource);
-        imagedestroy($resource);
+        $this->outputType->toScreen($resource);
     }
 }
