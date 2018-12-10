@@ -18,4 +18,14 @@ interface CanvasInterface
      * @return resource
      */
     public function getResource();
+
+    /**
+     * @return int
+     */
+    public function getWidth() : int;
+
+    /**
+     * @return int
+     */
+    public function getHeight() : int;
 }
