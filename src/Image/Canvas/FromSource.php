@@ -69,4 +69,20 @@ class FromSource implements CanvasInterface
     {
         return @imagecreatefromstring($this->source);
     }
+
+    /**
+     * @return int
+     */
+    public function getWidth(): int
+    {
+        return imagesx($this->getResource());
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeight(): int
+    {
+        return imagesy($this->getResource());
+    }
 }

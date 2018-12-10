@@ -36,4 +36,20 @@ class TrueColor implements CanvasInterface
     {
         return @imagecreatetruecolor($this->width, $this->height);
     }
+
+    /**
+     * @return int
+     */
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHeight(): int
+    {
+        return $this->height;
+    }
 }
