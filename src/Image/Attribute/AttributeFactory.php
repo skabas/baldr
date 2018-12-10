@@ -42,4 +42,14 @@ class AttributeFactory
     {
         return new Position($x, $y);
     }
+
+    /**
+     * @param int $width
+     * @param int $height
+     * @return Size
+     */
+    public function createSize(int $width, int $height) : Size
+    {
+        return new Size($width, $height);
+    }
 }

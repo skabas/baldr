@@ -23,4 +23,9 @@ class Image
     {
         $output->handle($this->resource);
     }
+
+    public function getResource()
+    {
+        return $this->resource;
+    }
 }
