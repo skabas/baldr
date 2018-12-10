@@ -9,54 +9,40 @@
 namespace Skabas\Baldr;
 
 use Skabas\Baldr\Image\Action\ActionInterface;
-use Skabas\Baldr\Image\Attribute\Color;
-use Skabas\Baldr\Image\Attribute\Font;
 use Skabas\Baldr\Image\Canvas\CanvasInterface;
 use Skabas\Baldr\Image\Component\ComponentInterface;
 
+/**
+ * @package Skabas\Baldr
+ */
 class ImageBuilder
 {
     /** @var CanvasInterface $canvas */
     private $canvas;
-    /** @var Font[] $fonts */
-    private $fonts;
-    /** @var Color[] $colors */
-    private $colors;
-    /** @var ActionInterface[] $actions */
+    /** @var array $actions */
     private $actions;
     /** @var ComponentInterface[] $components */
     private $components;
 
+    /**
+     * @param CanvasInterface $canvas
+     */
     public function __construct(CanvasInterface $canvas)
     {
         $this->canvas = $canvas;
     }
 
     /**
-     * @param Font $font
+     * @param ActionInterface $action
      * @return $this
      */
-    public function addFont(Font $font)
-    {
-        $this->fonts[$font->getId()] = $font;
-
-        return $this;
-    }
-
-    /**
-     * @param Color $color
-     * @return $this
-     */
-    public function addColor(Color $color)
-    {
-        $this->colors[$color->getId($this->canvas->getImage())] = $color;
-
-        return $this;
-    }
-
     public function addAction(ActionInterface $action)
     {
-        $this->actions[] = $action;
+        if (! isset($this->actions[$action->getType()])) {
+            $this->actions[$action->getType()] = [];
+        }
+
+        $this->actions[$action->getType()][] = $action;
 
         return $this;
     }
@@ -79,12 +65,18 @@ class ImageBuilder
     {
         $resource = $this->canvas->getResource();
 
-        foreach ($this->actions as $action) {
+        foreach ($this->actions[ActionInterface::TYPE_BEFORE_COMPONENTS] as $action) {
+            /** @var ActionInterface $action */
             $action->execute($resource);
         }
 
         foreach ($this->components as $component) {
             $component->attachTo($resource);
+        }
+
+        foreach ($this->actions[ActionInterface::TYPE_AFTER_COMPONENTS] as $action) {
+            /** @var ActionInterface $action */
+            $action->execute($resource);
         }
 
         return new Image($resource);

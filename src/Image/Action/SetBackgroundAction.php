@@ -10,6 +10,10 @@ namespace Skabas\Baldr\Image\Action;
 
 use Skabas\Baldr\Image\Attribute\Color;
 
+/**
+ * Class SetBackgroundAction
+ * @package Skabas\Baldr
+ */
 class SetBackgroundAction implements ActionInterface
 {
     /** @var Color $color */
@@ -34,5 +38,13 @@ class SetBackgroundAction implements ActionInterface
         }
 
         return @imagefill($image, 0, 0, $this->color->getId($image));
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string
+    {
+        return ActionInterface::TYPE_BEFORE_COMPONENTS;
     }
 }
