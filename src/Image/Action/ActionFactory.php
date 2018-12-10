@@ -10,6 +10,10 @@ namespace Skabas\Baldr\Image\Action;
 
 use Skabas\Baldr\Image\Attribute\Color;
 
+/**
+ * Class ActionFactory
+ * @package Skabas\Baldr
+ */
 class ActionFactory
 {
     /**
@@ -19,5 +23,14 @@ class ActionFactory
     public function createSetBackgroundAction(Color $color)
     {
         return new SetBackgroundAction($color);
+    }
+
+    /**
+     * @param bool $value
+     * @return SetAntiAliasAction
+     */
+    public function createSetAntiAliasAction(bool $value)
+    {
+        return new SetAntiAliasAction($value);
     }
 }
