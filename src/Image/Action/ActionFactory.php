@@ -33,4 +33,22 @@ class ActionFactory
     {
         return new SetAntiAliasAction($value);
     }
+
+    /**
+     * @param bool $value
+     * @return SetAlphaBlendingAction
+     */
+    public function createSetAlphaBlendingAction(bool $value)
+    {
+        return new SetAlphaBlendingAction($value);
+    }
+
+    /**
+     * @param bool $value
+     * @return SetImageSaveAlpha
+     */
+    public function createSetImageSaveAlpha(bool $value)
+    {
+        return new SetImageSaveAlpha($value);
+    }
 }
